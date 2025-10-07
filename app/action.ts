@@ -3,8 +3,13 @@
 import requireUserHooks from "@/utils/hooks";
 import { prisma } from "@/utils/prisma";
 import { onboardingSchema } from "@/utils/ZodSchema";
-import {parseWithZod} from '@conform-to/zod'
-export async function onboardingUser(formData:FormData){
+import { parseWithZod } from "@conform-to/zod";
+
+import { redirect } from "next/navigation";
+
+
+
+export async function onboardingUser(prevstate:any,formData:FormData){
     const session = await requireUserHooks();
     const submission = parseWithZod(formData,{
         schema:onboardingSchema,
@@ -16,5 +21,12 @@ export async function onboardingUser(formData:FormData){
 
     const data = await prisma.user.update({
         where:{id:session.user?.id},
-        data:{firstname:submission.value.firstName,lastname:submission.value.lastName},
-})};
+        data:{firstname:submission.value.firstName,
+            lastname:submission.value.lastName,
+            address:submission.value.address
+
+        },
+
+});
+    return redirect('/dashboard');
+};

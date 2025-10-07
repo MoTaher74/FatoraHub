@@ -1,0 +1,33 @@
+import InvoiceList from "@/components/InvoiceList";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { PlusIcon } from "lucide-react";
+import Link from "next/link";
+
+export default function InvoiceRoute(){
+
+
+    return(
+        <Card>
+            <CardHeader>
+                <div className="flex items-center justify-between">
+                    <div>
+                        <CardTitle className="text-xl font-bold">
+                            Fatoras
+                        </CardTitle>
+                        <CardDescription>
+                            manage your fatora right 
+                        </CardDescription>
+                    </div>
+                    <Link href={"/dashboard/invoices/create"} className={buttonVariants()}>
+                    <PlusIcon className="size-4"/>New Fatora
+                    </Link>
+                </div>
+            </CardHeader>
+
+            <CardContent>
+                <InvoiceList/>
+            </CardContent>
+        </Card>
+    )
+}

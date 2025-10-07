@@ -20,4 +20,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     verifyRequest:'/verify'
   },
+   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // أي حد يسجّل دخول هيتحول على /dashboard
+      return `${baseUrl}/dashboard`
+    },
+  },
 })

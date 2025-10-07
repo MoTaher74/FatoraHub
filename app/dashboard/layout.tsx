@@ -9,12 +9,27 @@ import { Button } from "@/components/ui/button";
 import { Menu, User2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger,DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-;
-import { signOut } from "next-auth/react";
 import SignOutButton from "@/components/ui/logout";
+import { prisma } from "@/utils/prisma";
+import { redirect } from "next/navigation";
+
+const getUser = async(userId:string)=>{
+const data = await prisma.user.findUnique({
+    where:{id:userId},
+
+    select:{firstname:true,
+        lastname:true,
+        address:true
+        }
+    });
+    if(!data?.firstname || !data?.lastname || !data?.address){
+        redirect('/onboarding');
+    }
+}
 
 export default async function DashboardLayout({children}:{children:ReactNode}){
 //    const session = await requireUserHooks();
+//    const data = await getUser(session.user?.id as string);
    return (
     <>
     <div className="min-h-screen grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] w-full">
