@@ -1,9 +1,18 @@
-import Image from "next/image";
+import { DemoSection } from "@/components/DemoSection";
+import { Footer } from "@/components/Footer";
+import { Hero } from "@/components/Hero";
+import { MiddleHeroSec } from "@/components/MiddleHeroSec";
+import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-   <h1>hello from fans ...</h1>
-    </div>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-7 lg:px-8 py-4">
+      <Navbar/>
+    <Hero/>
+    <MiddleHeroSec/>
+    <DemoSection/>
+    <Footer/>
+    </main>
   );
 }
+
